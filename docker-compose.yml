@@ -1,0 +1,14 @@
+version: '3'
+services:
+  flask:
+    build: ./src
+    container_name: ai_service_project
+    environment:
+      - FLASK_ENV=development
+      - PYTHONUNBUFFERED=True                    
+    restart: on-failure
+    volumes:
+      - ./src:/src
+    ports:
+      - "5000:5000"
+    command: python main.py
