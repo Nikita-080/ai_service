@@ -1,10 +1,31 @@
 from flask import Flask
+from flask import request
+from ollama import chat
+import json
 
+class Resource():
+    def __init__(self):
+        with open("./resources.json", "r") as file:
+            data = json.load(file)
+        self.version = data["version"]
+        self.system_prompt = data["system_prompt"]
+
+resource = Resource()
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return "<h1>Hello, World!<h1>"
+@app.route('/api/GetAnswer', methods=['GET'])
+def get_answer():
+    question = request.args.get("question")
+    answer = chat('qwen2.5:0.5b',   
+                messages=[  
+                    {'role': 'system', 'content': resource.system_prompt},  
+                    {'role': 'user', 'content': question}  
+                ])  
+    return answer.message.content
+
+@app.route('/api/GetVersion', methods=['GET'])
+def get_version():
+    return resource.version
 
 if __name__ == '__main__':
    app.run(host='0.0.0.0')
