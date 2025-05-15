@@ -1,14 +1,21 @@
-version: '3'
 services:
-  flask:
-    build: ./src
-    container_name: ai_service_project
+  app_service:
+    build: ./app
+    container_name: app_service_docker
     environment:
       - FLASK_ENV=development
       - PYTHONUNBUFFERED=True                    
     restart: on-failure
     volumes:
-      - ./src:/src
+      - ./app:/app
     ports:
       - "5000:5000"
-    command: python main.py
+  llm_service:
+    build: ./llm
+    container_name: llm_service_docker
+    volumes:
+      - ./ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    environment:
+      OLLAMA_KEEP_ALIVE: -1

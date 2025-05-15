@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-from ollama import chat
+from ollama import Client
 import json
 
 class Resource():
@@ -10,13 +10,17 @@ class Resource():
         self.version = data["version"]
         self.system_prompt = data["system_prompt"]
 
+client = Client(
+  host='http://localhost:11434'
+)
+
 resource = Resource()
 app = Flask(__name__)
 
 @app.route('/api/GetAnswer', methods=['GET'])
 def get_answer():
     question = request.args.get("question")
-    answer = chat('qwen2.5:0.5b',   
+    answer = client.chat('qwen2.5:0.5b',   
                 messages=[  
                     {'role': 'system', 'content': resource.system_prompt},  
                     {'role': 'user', 'content': question}  
