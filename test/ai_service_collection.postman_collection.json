@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "5b044f77-9cff-4eae-ae80-04a156d3ff43",
+		"name": "ai_service_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38889955"
+	},
+	"item": [
+		{
+			"name": "GetVersion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/GetVersion",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"GetVersion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAnswer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/GetAnswer?question=\"сохранение таблицы в csv\"",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"GetAnswer"
+					],
+					"query": [
+						{
+							"key": "question",
+							"value": "\"сохранение таблицы в csv\""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

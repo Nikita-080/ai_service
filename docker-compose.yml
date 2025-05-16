@@ -18,4 +18,4 @@ services:
     ports:
       - "11434:11434"
     environment:
-      OLLAMA_KEEP_ALIVE: -1
+      - OLLAMA_KEEP_ALIVE=-1
