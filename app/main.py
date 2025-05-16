@@ -10,17 +10,24 @@ class Resource():
         self.version = data["version"]
         self.system_prompt = data["system_prompt"]
 
-client = Client(
-  host='http://localhost:11434'
-)
+class Config():
+    def __init__(self):
+        with open("./config.json", "r") as file:
+            data = json.load(file)
+        self.ollama_host = data["ollama_host"]
+        self.model_name = data["model_name"]
 
 resource = Resource()
+config = Config()
+
+client = Client(host=config.ollama_host)
+
 app = Flask(__name__)
 
 @app.route('/api/GetAnswer', methods=['GET'])
 def get_answer():
     question = request.args.get("question")
-    answer = client.chat('qwen2.5:0.5b',   
+    answer = client.chat(config.model_name,   
                 messages=[  
                     {'role': 'system', 'content': resource.system_prompt},  
                     {'role': 'user', 'content': question}  
