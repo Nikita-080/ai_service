@@ -28,6 +28,9 @@ app = Flask(__name__)
 def get_answer():
     question = request.args.get('question')
 
+    if request.args.get('format', default='disable') == 'enable':
+        question = resource.template.format(question)
+
     system_message = {'role': 'system', 'content': resource.system_prompt}
     user_message = {'role': 'user', 'content': question}
         
