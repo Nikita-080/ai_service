@@ -1,4 +1,4 @@
 {
   "ollama_host": "http://localhost:11434",
-  "model_name": "qwen2.5:0.5b"
+  "model_name": "qwen2.5:3b"
 }
