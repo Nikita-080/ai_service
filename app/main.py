@@ -15,7 +15,7 @@ class Config():
     def __init__(self):
         with open('./config.json', 'r') as file:
             data = json.load(file)
-        self.ollama_host = "{0}:{1}".format(data['ollama_host'], os.getenv('OLLAM_PORT'))
+        self.ollama_host = "{0}:{1}".format(data['ollama_host'], os.getenv('OLLAMA_PORT'))
         self.model_name = data['model_name']
 
 resource = Resource()
